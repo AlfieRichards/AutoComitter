@@ -1,0 +1,1 @@
+cd C:\Users\asdaFemboy\PycharmProjects\githubAutoCommit && pyinstaller --onefile --paths=C:\Users\asdaFemboy\PycharmProjects\githubAutoCommit\venv\Lib\site-packages --hidden-import plyer.platforms.win.notification .\host.py
