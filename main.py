@@ -1,4 +1,6 @@
-main_version = 1.3
+main_version = 1.4
+import ctypes
+import platform
 import os
 import sys
 import time
@@ -128,9 +130,11 @@ def send_request(request, token_count):
     completion = openai.ChatCompletion.create(  # Change the function Completion to ChatCompletion
         model=model,
         messages=[  # Change the prompt parameter to the messages parameter
+            {'role': 'system',
+             'content': "You are a programmer working in a team of developers. Your job is to neatly fillout the summarys for their github commits in a way which their boss can understand. To keep your team happy, Prioritise not missing files (modified or new) as this is bad and can lead to project delays. To help the boss understand the changes, use simple language and avoid saying code. Make sure to mention any key updates or bug fixes that were implemented. Remember, the summary should provide a high-level overview of each commit, outlining the main changes made."},
             {'role': 'user', 'content': request}
         ],
-        temperature=0
+        temperature=0.5
     )
     content = completion['choices'][0]['message']['content'].strip('"')
     # print(content)
@@ -142,19 +146,54 @@ def send_request(request, token_count):
     return content
 
 
+# solves issue with not working properly on US or other keyboards
+def get_keyboard_layout():
+    # Load the user32.dll library
+    user32 = ctypes.WinDLL('user32', use_last_error=True)
+    curr_window = user32.GetForegroundWindow()
+    thread_id = user32.GetWindowThreadProcessId(curr_window, 0)
+    klid = user32.GetKeyboardLayout(thread_id)
+
+    # Retrieve the layout name as a string
+    lid = klid & (2 ** 16 - 1)
+    lid_hex = hex(lid)
+
+    if lid_hex == hex(0x409):
+        print("america")
+        return '`'  # American keyboard layout
+    else:
+        print("europe")
+        print(lid_hex)
+        return "'"  # Non-American keyboard layout
+
+
+# get windows version
+def check_windows_version():
+    platform_info = platform.platform()
+
+    if "Windows-10" in platform_info:
+        return "Windows 10"
+    elif "Windows-11" in platform_info:
+        return "Windows 11"
+    else:
+        return "Unknown Windows version"
+
+
 def get_filepath():
     # laptop
     # keyboard.press_and_release("ctrl+'")
     # pc
-    keyboard.press_and_release("ctrl+`")
+    keyboard.press_and_release("ctrl+" + get_keyboard_layout())
     time.sleep(1)
     active_window_handle = win32gui.GetForegroundWindow()
     window_title = win32gui.GetWindowText(active_window_handle)
 
     if window_title == "Command Prompt":
-        # win 11 uses ctrl shift a
-        # keyboard.press_and_release('ctrl+shift+a')
-        keyboard.press_and_release('ctrl+a')
+        if check_windows_version == "Windows-11":
+            keyboard.press_and_release('ctrl+shift+a')
+        else:
+            keyboard.press_and_release('ctrl+a')
+
         time.sleep(0.1)
         keyboard.press_and_release('ctrl+c')
         time.sleep(0.1)
@@ -495,6 +534,7 @@ def run_main():
 
     keyboard.on_press(lambda event: on_keypress(event, EXE, git_executable))
     keyboard.wait()
+
 
 # word = ""
 # i = 0
