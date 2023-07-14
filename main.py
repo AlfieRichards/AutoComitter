@@ -17,9 +17,8 @@ import win32clipboard
 
 from config import run_config
 
-
 supported_extensions_path = "supported_extensions.txt"
-shell=win32com.client.Dispatch("WScript.Shell")
+shell = win32com.client.Dispatch("WScript.Shell")
 default_directory = os.getcwd()
 
 config_file = "config.txt"
