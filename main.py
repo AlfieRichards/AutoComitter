@@ -247,7 +247,7 @@ def get_individual_changes(file_path, changed_files):
                 # Store the changes in the dictionary with the file name as the key
                 if (changes) == []:
                     changes = [
-                        '+   This file  ' + file + " Is completely new. Please make sure to Say that you created it"]
+                        '+   This file  ' + file + " Is completely new. Please make sure to Say that you created it\n\n"]
                 individual_changes[file] = changes
 
                 break  # Stop searching once the file is found
@@ -282,9 +282,9 @@ def gpt_summary(changes, file_path):
                     original_text = f.read()
 
                 # Format the original file and changes into the summary string
-                summary = f"Here is the original file for context \n {original_text} \n and here are the changes \n {', '.join(changes_list)}"
+                summary = f"\n\n Here is the full file for context: \n {original_text} \n \n and here are the changes which were made: \n {', '.join(changes_list)}"
                 if file != list(changes.keys())[-1]:
-                    summary += " \n, summarize this in the shortest way possible, the next object is below which you must also summarize. If the changes do not say it was created, do not say it was created."
+                    summary += " \n\n, summarize this in the shortest way possible, the next object is below which you must also summarize. If the changes do not say it was created, do not say it was created."
 
                 # Check token count
                 token_count += count_tokens(summary, "cl100k_base")
@@ -333,7 +333,7 @@ def gpt_requester(split_lists, token_amount):
     responses = []
     shortened_responses = []
 
-    prompt = 'Below are several files, each file contains the original content (usually text, numbers and symbols) along with the changes made to it. Please summarise the changes in each file as shortly as you can, making sure to say the file name. Please only say the summaries and nothing else. Write your responses in this style. For example if a new file was made say "Created a new file named fileName.txt". or if something is changed say "Added a new method: Start() that logs "has started"".  Do not write in a list. Do not skip any files. If a change starts with + the line was added. If it starts with - it was removed. If a section is removed say so. Thank you:\n'
+    prompt = 'Below are several files, each file contains the original content, along with any changes made to it during development.Only give explanations in an easy to understand way and do not say any of the changes. Also only say the explanations.Do not write in a list. Do not skip any files or objects. ALWAYS say the filename before listing any of the changes. If a change starts with + the line was added. If it starts with - it was removed. Write only the summaries. Thank you.\n'
 
     combined_summary = prompt
     for split_list in split_lists:
