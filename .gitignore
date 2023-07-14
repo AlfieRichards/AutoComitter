@@ -8,6 +8,10 @@ __pycache__/
 # C extensions
 *.so
 
+# bat extensions
+*.bat
+
+
 # Distribution / packaging
 .Python
 env/
@@ -184,6 +188,3 @@ fabric.properties
 
 # idea folder, uncomment if you don't need it
 # .idea
-buildGithubButton.bat
-buildGithubButton.bat
-*.bat
