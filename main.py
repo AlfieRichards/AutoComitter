@@ -1,4 +1,4 @@
-main_version = 1.2
+main_version = 1.3
 import os
 import sys
 import time
@@ -16,6 +16,10 @@ import win32gui, win32com.client
 import win32clipboard
 
 from config import run_config
+
+import openai
+
+openai.api_key = "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"
 
 supported_extensions_path = "supported_extensions.txt"
 shell = win32com.client.Dispatch("WScript.Shell")
@@ -115,35 +119,34 @@ def type_and_submit(var1, var2):
     keyboard.press_and_release('enter')
 
 
-def send_request(request):
-    url = "https://free.churchless.tech/v1/chat/completions"
+def send_request(request, token_count):
+    if token_count == 4096:
+        model = "gpt-3.5-turbo"
+    else:
+        model = "gpt-3.5-turbo-16k"
 
-    headers = {
-        "Content-Type": "application/json"
-    }
-
-    data = {
-        "model": "gpt-3.5-turbo",
-        "messages": [
-            {
-                "role": "user",
-                "content": request
-            }
-        ]
-    }
-
-    response = requests.post(url, headers=headers, json=data)
-
-    content = response.json()['choices'][0]['message']['content'].strip('"')
+    completion = openai.ChatCompletion.create(  # Change the function Completion to ChatCompletion
+        model=model,
+        messages=[  # Change the prompt parameter to the messages parameter
+            {'role': 'user', 'content': request}
+        ],
+        temperature=0
+    )
+    content = completion['choices'][0]['message']['content'].strip('"')
     # print(content)
+    input_cost = ((count_tokens(request, "cl100k_base")) / 1000) * 0.0015
+    output_cost = ((count_tokens(content, "cl100k_base")) / 1000) * 0.002
+    print(request)
+    print("Total cost: $" + str((input_cost + output_cost)))
+    print("Model used: " + model)
     return content
 
 
 def get_filepath():
     # laptop
-    keyboard.press_and_release("ctrl+'")
+    # keyboard.press_and_release("ctrl+'")
     # pc
-    # keyboard.press_and_release("ctrl+`")
+    keyboard.press_and_release("ctrl+`")
     time.sleep(1)
     active_window_handle = win32gui.GetForegroundWindow()
     window_title = win32gui.GetWindowText(active_window_handle)
@@ -260,35 +263,32 @@ def convert_list_to_lines(input_list):
 def count_tokens(input_text, encoding_name):
     encoding = tiktoken.get_encoding(encoding_name)
     num_tokens = len(encoding.encode(input_text))
-
     return num_tokens
 
 
-def gpt_summary(changes, file_path, token_limit):
+def gpt_summary(changes, file_path):
     summaries = []
+    token_count = 0
 
     for file, changes_list in changes.items():
         # Search for the file within the file_path and its subfolders
         for root, dirs, files in os.walk(file_path):
             if file in files:
-                # Construct the absolute path to the file
+                # Construct the absolute path to the file so that we can open it
                 file_abs_path = os.path.join(root, file)
 
                 # Read the original file text
-                with open(file_abs_path, 'r') as f:
+                with open(file_abs_path, 'r', encoding='utf-8-sig') as f:
                     original_text = f.read()
 
                 # Format the original file and changes into the summary string
-                summary = f"Here is the original file for context \n {original_text} \n and here are the changes \n {', '.join(changes_list)} \n, summarize this in the shortest way possible, the next object is below which you must also summarize. If the changes do not say it was created do not say it was created"
+                summary = f"Here is the original file for context \n {original_text} \n and here are the changes \n {', '.join(changes_list)}"
+                if file != list(changes.keys())[-1]:
+                    summary += " \n, summarize this in the shortest way possible, the next object is below which you must also summarize. If the changes do not say it was created, do not say it was created."
 
                 # Check token count
-                token_count = count_tokens(summary, "cl100k_base")
-                if token_count > token_limit:
-                    summaries.append(
-                        "Large changes made to file: " + file + " Just say that large changes were made. Do not make up changes which I have not told you")
-                    print("Summary exceeds token limit.")
-                else:
-                    summaries.append(summary)
+                token_count += count_tokens(summary, "cl100k_base")
+                summaries.append(summary)
 
                 break  # Stop searching once the file is found
 
@@ -301,88 +301,143 @@ def split_summaries(summaries, token_limit):
     current_token_count = 0
 
     for summary in summaries:
+        # for every summary given in the list we will see how many tokens it uses
         token_count = count_tokens(summary, "cl100k_base")
+
+        # if the current summaries in current_list were to have this summary added on, would it go over the token limit?
         if current_token_count + token_count > token_limit:
+            # if it does go over the limit, add the current_list to split lists, and then make a new current_list and add it to that instead
             split_lists.append(current_list)
-            current_list = []
+
+            # reset the current list and token count
+            current_list = None
             current_token_count = 0
 
-        current_list.append(summary)
-        current_token_count += token_count
+            # add it to this new list and token count
+            current_list.append(summary)
+            current_token_count += token_count
 
-    if current_list:
-        split_lists.append(current_list)
+        else:
+            # if it doesn't go over the token limit, add it to the current list and add its tokens to the current count
+            current_list.append(summary)
+            current_token_count += token_count
+
+    split_lists.append(current_list)
 
     return split_lists
 
 
-def gpt_requester(split_lists):
+def gpt_requester(split_lists, token_amount):
     final_response = None
+    multiple_responses = False
+    responses = []
+    shortened_responses = []
 
-    prompt = 'Below are several files, each file contains the original content (usually text, numbers and symbols) along with the changes made to it. Please summarise the changes in each file as shortly as you can, making sure to say the file name. Please only say the summaries and nothing else. Write your responses in this style "Created a new file named current scores.txt" or "Added a new method: Start() that logs "has started"".  Do not write in a list. Do not skip any files. If a change starts with + the line was added. If it starts with - it was removed. If a section is removed say so. Thank you:\n'
+    prompt = 'Below are several files, each file contains the original content (usually text, numbers and symbols) along with the changes made to it. Please summarise the changes in each file as shortly as you can, making sure to say the file name. Please only say the summaries and nothing else. Write your responses in this style. For example if a new file was made say "Created a new file named fileName.txt". or if something is changed say "Added a new method: Start() that logs "has started"".  Do not write in a list. Do not skip any files. If a change starts with + the line was added. If it starts with - it was removed. If a section is removed say so. Thank you:\n'
 
+    combined_summary = prompt
     for split_list in split_lists:
         # Combine the summaries in the split list
-        combined_summary = prompt + '\n'.join(split_list)
+        combined_summary += '\n' + split_list
 
-        # Check token count of combined summary
-        token_count = count_tokens(combined_summary, "cl100k_base")
-        if token_count > 4096:
-            # Split the combined summary into new split lists
-            new_split_lists = split_summaries(split_list, 4096)
-            # Recursively call gpt_requester for the new split lists
-            response = gpt_requester(prompt + new_split_lists)
+    # Check token count of combined summary
+    token_count = count_tokens(combined_summary, "cl100k_base")
+
+    # makes sure we won't go over the chat gpt limit (not possible but is a safeguard)
+    if token_count > token_amount:
+        if token_amount == 4096:
+            token_amount = 16384
+
+    # begin generation with a notification
+    notify("Beginning generation")
+    # get chatgpt to do its thing
+    response = send_request(combined_summary, token_amount)
+
+    # Add the response to the final response list (in case we have multiple lists of summaries)
+    if final_response is None:
+        final_response = response
+        responses.append(response)
+    else:
+        responses.append(response)
+        multiple_responses = True
+
+    if multiple_responses == True:
+        for split_response in responses:
+            # get it to shorten its summary
+            temp_summary = "Summarize this as shortly as possible:\n" + split_response
+            # see if we can use a cheaper model
+            temp_summary_tokens = count_tokens(temp_summary, "cl100k_base")
+
+            # if we can use the cheaper model use it. If not oh well
+            if temp_summary_tokens < 4096:
+                shortened_responses.append(send_request(temp_summary, 4096))
+            else:
+                shortened_responses.append(send_request(temp_summary, 16384))
+
+        # summarises all the summaries
+        temp_summary = "Summarize this as shortly as possible:\n" + '\n'.join(
+            [entry + '\n' for entry in shortened_responses])
+        # see if we can use a cheaper model
+        temp_summary_tokens = count_tokens(temp_summary, "cl100k_base")
+
+        # if we can use the cheaper model use it. If not oh well
+        if temp_summary_tokens < 4096:
+            final_response = send_request(temp_summary, 4096)
         else:
-            # Send the request for the combined summary
-            notify("Beginning generation")
-            response = send_request(combined_summary)
-            print(combined_summary)
-            notify("Generation completed")
+            final_response = send_request(temp_summary, 16384)
 
-        # Add the response to the final response list
-        if final_response is None:
-            final_response = response
-        else:
-            final_response += response
-
-    # Summarize the final response as shortly as possible
-    final_summary = "Summarize all the responses as shortly as possible:\n" + final_response
-    token_count = count_tokens(final_summary, "cl100k_base")
-    while token_count > 4096:
-        # Split the final summary into new split lists
-        split_lists = split_summaries(final_response, 4096)
-        final_response = gpt_requester(split_lists)
-        final_summary = "Summarize all the responses as shortly as possible:\n" + final_response
-        token_count = count_tokens(final_summary, "cl100k_base")
+    notify("Generation completed")
 
     return final_response
 
 
 def do_commit(EXE, git_executable):
-    print("commiting")
-    if is_git_installed(EXE, git_executable):
-        file_path = get_filepath()
-        changed_files = filter_text_files(get_changed_files(file_path, EXE, git_executable))
+    initial_summary_tokens = 0
 
+    print("commiting")
+
+    if is_git_installed(EXE, git_executable):
+        # file path is the path to the actual repository
+        file_path = get_filepath()
+        # these are the names of all the changed files in the repo
+        changed_files = filter_text_files(get_changed_files(file_path, EXE, git_executable))
         print(get_changed_files(file_path, EXE, git_executable))
 
+        # debug printing the path to the repo and the files changed in it
         print("repo path: " + file_path)
         print("changed files: ")
         print(changed_files)
 
+        # this returns a dictionary where the key is the file name and the value is a list of all the changes
         changes_dict = get_individual_changes(file_path, changed_files)
 
-        # # Print the changes for each file
-        # for file, changes in changes_dict.items():
-        #     print("File:", file)
-        #     print("Changes:")
-        #     for change in changes:
-        #         print(change)
-        #     print()
+        # returns a list of the prompts for chat gpt to summarise every file
+        initial_summary = gpt_summary(changes_dict, file_path)
 
-        initial_summary = gpt_summary(changes_dict, file_path, 4096)
-        splitted_summaries = split_summaries(initial_summary, 4096)
-        final_summary = (gpt_requester(splitted_summaries))
+        # sees how long all those prompts are to decide what model to use
+        for summary in initial_summary:
+            initial_summary_tokens += count_tokens(summary, "cl100k_base")
+
+        print("Initial summary tokens: " + str(initial_summary_tokens))
+
+        # 16384 is the 16k limit
+        # 4096 is the 4k limit
+        # we subtract 200 to account for the initial prompt here
+
+        if initial_summary_tokens >= 3896:
+            if initial_summary_tokens >= 16184:
+                print("total changes is greater than 16k tokens, gonna use the 16k and split it")
+                splitted_summaries = split_summaries(initial_summary, 16184)
+                # sends the list of prompts to the gpt requester, after splitting them up, and tells it to use the 16k model
+                final_summary = (gpt_requester(splitted_summaries, 16384))
+            else:
+                print("total changes is less than 16k tokens but more than 4k, gonna use the 16k")
+                # sends the list of prompts to the gpt requester and tells it to use the 16k model
+                final_summary = (gpt_requester(initial_summary, 16384))
+        else:
+            print("total changes is less than 4096 tokens, gonna use the 4k")
+            # sends the list of prompts to the gpt requester and tells it to use the 4k model
+            final_summary = (gpt_requester(initial_summary, 4096))
 
         print("final summary:")
         print(final_summary)
@@ -440,3 +495,11 @@ def run_main():
 
     keyboard.on_press(lambda event: on_keypress(event, EXE, git_executable))
     keyboard.wait()
+
+# word = ""
+# i = 0
+# while i < 50000:
+#     word = word + "a"
+#     i += 1
+#
+# count_tokens(word, "cl100k_base")

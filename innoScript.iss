@@ -35,7 +35,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 Source: "C:\Users\asdaFemboy\Downloads\Git-2.41.0.2-64-bit.exe"; DestDir: "{app}"; AfterInstall: RunOtherInstaller
-Source: "C:\Users\asdaFemboy\PycharmProjects\githubAutoCommit\testes\{#MyAppExeName}"; DestDir: "{userappdata}\{#MyAppName}"; Flags: ignoreversion
+Source: "C:\Users\asdaFemboy\Desktop\Github Repos\AutoComitter\dist\{#MyAppExeName}"; DestDir: "{userappdata}\{#MyAppName}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
