@@ -71,17 +71,22 @@ def select_window_by_name(window_name, EXE, git_executable):
     exe_path = EXE
 
     subprocess.run(exe_path)
-
-    # window_handle = win32gui.FindWindow(None, window_name)
-    # if window_handle == 0:
-    #     print(f"Window '{window_name}' not found.")
-    # else:
-    #     print(window_handle)
-    #     window_name = win32gui.GetWindowText(window_handle)
-    #     print("Window Name:", window_name)
-    #     shell.SendKeys(' ')  # Undocks my focus from Python IDLE
-    #     win32gui.SetForegroundWindow(window_handle)
-    #     win32gui.BringWindowToTop(window_handle)
+    #
+    # time.sleep(0.5)
+    # active_window_handle = win32gui.GetForegroundWindow()
+    # window_title = win32gui.GetWindowText(active_window_handle)
+    #
+    # if window_title != "GitHub Desktop":
+    #     window_handle = win32gui.FindWindow(None, window_name)
+    #     if window_handle == 0:
+    #         print(f"Window '{window_name}' not found.")
+    #     else:
+    #         print(window_handle)
+    #         window_name = win32gui.GetWindowText(window_handle)
+    #         print("Window Name:", window_name)
+    #         shell.SendKeys(' ')  # Undocks my focus from Python IDLE
+    #         win32gui.SetForegroundWindow(window_handle)
+    #         win32gui.BringWindowToTop(window_handle)
 
 
 def is_git_installed(EXE, git_executable):
@@ -105,20 +110,24 @@ def on_keypress(event, EXE, git_executable):
 
 
 def type_and_submit(var1, var2):
-    time.sleep(0.5)
-    keyboard.press_and_release('ctrl+g')
+    active_window_handle = win32gui.GetForegroundWindow()
+    window_title = win32gui.GetWindowText(active_window_handle)
 
-    time.sleep(0.5)  # Wait for the target application to process the Tab keypresses
+    if window_title == "GitHub Desktop":
+        time.sleep(0.5)
+        keyboard.press_and_release('ctrl+g')
 
-    # title
-    keyboard.write(var1)
-    keyboard.press_and_release('tab')
-    # summary
-    keyboard.write(var2)
+        time.sleep(0.5)  # Wait for the target application to process the Tab keypresses
 
-    keyboard.press_and_release('tab')
-    keyboard.press_and_release('tab')
-    keyboard.press_and_release('enter')
+        # title
+        keyboard.write(var1)
+        keyboard.press_and_release('tab')
+        # summary
+        keyboard.write(var2)
+
+        keyboard.press_and_release('tab')
+        keyboard.press_and_release('tab')
+        keyboard.press_and_release('enter')
 
 
 def send_request(request, token_count):
@@ -131,10 +140,10 @@ def send_request(request, token_count):
         model=model,
         messages=[  # Change the prompt parameter to the messages parameter
             {'role': 'system',
-             'content': "You are a programmer working in a team of developers. Your job is to neatly fillout the summarys for their github commits in a way which their boss can understand. To keep your team happy, Prioritise not missing files (modified or new) as this is bad and can lead to project delays. To help the boss understand the changes, use simple language and avoid saying code. Make sure to mention any key updates or bug fixes that were implemented. Remember, the summary should provide a high-level overview of each commit, outlining the main changes made."},
+             'content': "You are a programmer working in a team of developers. Your job is to neatly fillout the summarys for their github commits in a way which their boss can understand. To keep your team happy, Prioritise not missing files (modified or new) as this is bad and can lead to project delays. To help the boss understand the changes, use simple language and avoid saying code. Make sure to mention any key updates or bug fixes that were implemented. Remember, the summary should provide a high-level overview of each commit, outlining the main changes made. Never skip any files"},
             {'role': 'user', 'content': request}
         ],
-        temperature=0.5
+        temperature=0.7
     )
     content = completion['choices'][0]['message']['content'].strip('"')
     # print(content)
@@ -168,15 +177,15 @@ def get_keyboard_layout():
 
 
 # get windows version
-def check_windows_version():
+def check_build_number():
     platform_info = platform.platform()
-
-    if "Windows-10" in platform_info:
-        return "Windows 10"
-    elif "Windows-11" in platform_info:
-        return "Windows 11"
+    x = platform_info.split("-")[-2]
+    z = x.split(".")[-1]
+    print(z)
+    if int(z) > 22000:
+        return True
     else:
-        return "Unknown Windows version"
+        return False
 
 
 def get_filepath():
@@ -189,9 +198,11 @@ def get_filepath():
     window_title = win32gui.GetWindowText(active_window_handle)
 
     if window_title == "Command Prompt":
-        if check_windows_version == "Windows-11":
+        if check_build_number() == True:
+            print("balls")
             keyboard.press_and_release('ctrl+shift+a')
         else:
+            print("sack")
             keyboard.press_and_release('ctrl+a')
 
         time.sleep(0.1)
@@ -206,7 +217,7 @@ def get_filepath():
         win32gui.PostMessage(active_window_handle, win32con.WM_CLOSE, 0, 0)
 
         cleaned_text = clipboard_text.split(") ", 1)[-1]
-        # Remove the trailing ">"
+# Remove the trailing ">"
         cleaned_text = cleaned_text.strip()
         cleaned_text = cleaned_text[:-1]
 
@@ -438,6 +449,7 @@ def do_commit(EXE, git_executable):
     if is_git_installed(EXE, git_executable):
         # file path is the path to the actual repository
         file_path = get_filepath()
+        time.sleep(0.2)
         # these are the names of all the changed files in the repo
         changed_files = filter_text_files(get_changed_files(file_path, EXE, git_executable))
         print(get_changed_files(file_path, EXE, git_executable))
@@ -481,6 +493,8 @@ def do_commit(EXE, git_executable):
         print("final summary:")
         print(final_summary)
 
+        select_window_by_name("GitHub Desktop", EXE, git_executable)
+        time.sleep(0.2)
         type_and_submit("Various changes", final_summary)
     else:
         print("Git not installed or not on filepath")
@@ -534,7 +548,6 @@ def run_main():
 
     keyboard.on_press(lambda event: on_keypress(event, EXE, git_executable))
     keyboard.wait()
-
 
 # word = ""
 # i = 0
