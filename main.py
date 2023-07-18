@@ -71,22 +71,29 @@ def select_window_by_name(window_name, EXE, git_executable):
     exe_path = EXE
 
     subprocess.run(exe_path)
-    #
-    # time.sleep(0.5)
-    # active_window_handle = win32gui.GetForegroundWindow()
-    # window_title = win32gui.GetWindowText(active_window_handle)
-    #
-    # if window_title != "GitHub Desktop":
-    #     window_handle = win32gui.FindWindow(None, window_name)
-    #     if window_handle == 0:
-    #         print(f"Window '{window_name}' not found.")
-    #     else:
-    #         print(window_handle)
-    #         window_name = win32gui.GetWindowText(window_handle)
-    #         print("Window Name:", window_name)
-    #         shell.SendKeys(' ')  # Undocks my focus from Python IDLE
-    #         win32gui.SetForegroundWindow(window_handle)
-    #         win32gui.BringWindowToTop(window_handle)
+
+    active_window_handle = win32gui.GetForegroundWindow()
+    window_title = win32gui.GetWindowText(active_window_handle)
+    window_name = "GitHub Desktop"
+
+    while True:
+        window_handle = win32gui.FindWindow(None, window_name)
+        if window_handle == 0:
+            print(f"Window '{window_name}' not found.")
+        else:
+            window_name = win32gui.GetWindowText(window_handle)
+            shell.SendKeys(' ')  # Undocks my focus from Python IDLE
+            win32gui.SetForegroundWindow(window_handle)
+            win32gui.BringWindowToTop(window_handle)
+            break
+
+    while True:
+        active_window_handle = win32gui.GetForegroundWindow()
+        window_title = win32gui.GetWindowText(active_window_handle)
+        if window_title != "GitHub Desktop":
+            print(window_title)
+        else:
+            return
 
 
 def is_git_installed(EXE, git_executable):
@@ -114,10 +121,7 @@ def type_and_submit(var1, var2):
     window_title = win32gui.GetWindowText(active_window_handle)
 
     if window_title == "GitHub Desktop":
-        time.sleep(0.5)
         keyboard.press_and_release('ctrl+g')
-
-        time.sleep(0.5)  # Wait for the target application to process the Tab keypresses
 
         # title
         keyboard.write(var1)
@@ -189,39 +193,62 @@ def check_build_number():
 
 
 def get_filepath():
-    # laptop
-    # keyboard.press_and_release("ctrl+'")
-    # pc
+    while True:
+        active_window_handle = win32gui.GetForegroundWindow()
+        window_title = win32gui.GetWindowText(active_window_handle)
+        if window_title != "GitHub Desktop":
+            print(window_title)
+        else:
+            break
+
     keyboard.press_and_release("ctrl+" + get_keyboard_layout())
     time.sleep(1)
+
     active_window_handle = win32gui.GetForegroundWindow()
     window_title = win32gui.GetWindowText(active_window_handle)
+    window_name = "Command Prompt"
 
-    if window_title == "Command Prompt":
-        if check_build_number() == True:
-            print("balls")
-            keyboard.press_and_release('ctrl+shift+a')
+    while True:
+        window_handle = win32gui.FindWindow(None, window_name)
+        if window_handle == 0:
+            print(f"Window '{window_name}' not found.")
         else:
-            print("sack")
-            keyboard.press_and_release('ctrl+a')
+            print(window_handle)
+            window_name = win32gui.GetWindowText(window_handle)
+            print("Window Name:", window_name)
+            shell.SendKeys(' ')  # Undocks my focus from Python IDLE
+            win32gui.SetForegroundWindow(window_handle)
+            win32gui.BringWindowToTop(window_handle)
+            break
 
-        time.sleep(0.1)
-        keyboard.press_and_release('ctrl+c')
-        time.sleep(0.1)
+    while True:
+        active_window_handle = win32gui.GetForegroundWindow()
+        window_title = win32gui.GetWindowText(active_window_handle)
+        if window_title != "Command Prompt":
+            print(window_title)
+        else:
+            if check_build_number():
+                keyboard.press_and_release('ctrl+shift+a')
+            else:
+                keyboard.press_and_release('ctrl+a')
 
-        win32clipboard.OpenClipboard()
-        clipboard_text = win32clipboard.GetClipboardData(win32clipboard.CF_TEXT)
-        win32clipboard.CloseClipboard()
-        clipboard_text = clipboard_text.decode('utf-8')  # Assuming UTF-8 encoding
+            time.sleep(0.1)
+            keyboard.press_and_release('ctrl+c')
+            time.sleep(0.1)
 
-        win32gui.PostMessage(active_window_handle, win32con.WM_CLOSE, 0, 0)
+            win32clipboard.OpenClipboard()
+            clipboard_text = win32clipboard.GetClipboardData(win32clipboard.CF_TEXT)
+            win32clipboard.CloseClipboard()
+            clipboard_text = clipboard_text.decode('utf-8')  # Assuming UTF-8 encoding
 
-        cleaned_text = clipboard_text.split(") ", 1)[-1]
-# Remove the trailing ">"
-        cleaned_text = cleaned_text.strip()
-        cleaned_text = cleaned_text[:-1]
+            win32gui.PostMessage(active_window_handle, win32con.WM_CLOSE, 0, 0)
 
-        return cleaned_text
+            cleaned_text = clipboard_text.split(") ", 1)[-1]
+    # Remove the trailing ">"
+            cleaned_text = cleaned_text.strip()
+            cleaned_text = cleaned_text[:-1]
+
+            return cleaned_text
 
 
 def filter_text_files(file_list):
@@ -494,7 +521,6 @@ def do_commit(EXE, git_executable):
         print(final_summary)
 
         select_window_by_name("GitHub Desktop", EXE, git_executable)
-        time.sleep(0.2)
         type_and_submit("Various changes", final_summary)
     else:
         print("Git not installed or not on filepath")
