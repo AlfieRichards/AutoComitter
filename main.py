@@ -68,12 +68,12 @@ def notify(text):
 
 
 def select_window_by_name(window_name, EXE, git_executable):
+    start_time = time.time()
+
     exe_path = EXE
 
     subprocess.run(exe_path)
 
-    active_window_handle = win32gui.GetForegroundWindow()
-    window_title = win32gui.GetWindowText(active_window_handle)
     window_name = "GitHub Desktop"
 
     while True:
@@ -81,12 +81,15 @@ def select_window_by_name(window_name, EXE, git_executable):
         if window_handle == 0:
             print(f"Window '{window_name}' not found.")
         else:
-            window_name = win32gui.GetWindowText(window_handle)
-            shell.SendKeys(' ')  # Undocks my focus from Python IDLE
+            # shell.SendKeys(' ')  # Undocks my focus from Python IDLE
             win32gui.SetForegroundWindow(window_handle)
             win32gui.BringWindowToTop(window_handle)
             break
 
+        if time.time() - start_time > 3:
+            break
+
+    start_time = time.time()
     while True:
         active_window_handle = win32gui.GetForegroundWindow()
         window_title = win32gui.GetWindowText(active_window_handle)
@@ -94,6 +97,9 @@ def select_window_by_name(window_name, EXE, git_executable):
             print(window_title)
         else:
             return
+
+        if time.time() - start_time > 3:
+            break
 
 
 def is_git_installed(EXE, git_executable):
@@ -121,17 +127,27 @@ def type_and_submit(var1, var2):
     window_title = win32gui.GetWindowText(active_window_handle)
 
     if window_title == "GitHub Desktop":
+        keyboard.press_and_release('ctrl+1')
+        time.sleep(0.05)
         keyboard.press_and_release('ctrl+g')
+        time.sleep(0.1)
 
         # title
         keyboard.write(var1)
+        time.sleep(0.05)
         keyboard.press_and_release('tab')
+        time.sleep(0.01)
         # summary
         keyboard.write(var2)
+        time.sleep(0.05)
 
         keyboard.press_and_release('tab')
+        time.sleep(0.01)
         keyboard.press_and_release('tab')
+        time.sleep(0.01)
         keyboard.press_and_release('enter')
+        time.sleep(0.01)
+        keyboard.press_and_release('ctrl+2')
 
 
 def send_request(request, token_count):
@@ -185,7 +201,7 @@ def check_build_number():
     platform_info = platform.platform()
     x = platform_info.split("-")[-2]
     z = x.split(".")[-1]
-    print(z)
+    print("ver: " + str(z))
     if int(z) > 22000:
         return True
     else:
@@ -193,6 +209,8 @@ def check_build_number():
 
 
 def get_filepath():
+    start_time = time.time()
+
     while True:
         active_window_handle = win32gui.GetForegroundWindow()
         window_title = win32gui.GetWindowText(active_window_handle)
@@ -201,39 +219,56 @@ def get_filepath():
         else:
             break
 
+        if time.time() - start_time > 3:
+            break
+
     keyboard.press_and_release("ctrl+" + get_keyboard_layout())
-    time.sleep(1)
+    print("press 1")
+    # time.sleep(1)
 
     active_window_handle = win32gui.GetForegroundWindow()
     window_title = win32gui.GetWindowText(active_window_handle)
     window_name = "Command Prompt"
 
+    start_time = time.time()
     while True:
         window_handle = win32gui.FindWindow(None, window_name)
         if window_handle == 0:
             print(f"Window '{window_name}' not found.")
         else:
-            print(window_handle)
             window_name = win32gui.GetWindowText(window_handle)
             print("Window Name:", window_name)
-            shell.SendKeys(' ')  # Undocks my focus from Python IDLE
-            win32gui.SetForegroundWindow(window_handle)
-            win32gui.BringWindowToTop(window_handle)
+
+            active_window_handle = win32gui.GetForegroundWindow()
+            window_title = win32gui.GetWindowText(active_window_handle)
+
+            if window_title != "Command Prompt":
+                # shell.SendKeys(' ')  # Undocks my focus from Python IDLE
+                win32gui.SetForegroundWindow(window_handle)
+                win32gui.BringWindowToTop(window_handle)
             break
 
+        if time.time() - start_time > 3:
+            break
+
+    start_time = time.time()
     while True:
         active_window_handle = win32gui.GetForegroundWindow()
         window_title = win32gui.GetWindowText(active_window_handle)
         if window_title != "Command Prompt":
             print(window_title)
         else:
+            time.sleep(0.1)
             if check_build_number():
                 keyboard.press_and_release('ctrl+shift+a')
+                print("press 2")
             else:
                 keyboard.press_and_release('ctrl+a')
+                print("press 3")
 
             time.sleep(0.1)
             keyboard.press_and_release('ctrl+c')
+            print("press 4")
             time.sleep(0.1)
 
             win32clipboard.OpenClipboard()
@@ -244,11 +279,16 @@ def get_filepath():
             win32gui.PostMessage(active_window_handle, win32con.WM_CLOSE, 0, 0)
 
             cleaned_text = clipboard_text.split(") ", 1)[-1]
-    # Remove the trailing ">"
+            # Remove the trailing ">"
             cleaned_text = cleaned_text.strip()
             cleaned_text = cleaned_text[:-1]
 
-            return cleaned_text
+            break
+
+        if time.time() - start_time > 3:
+            return
+
+    return cleaned_text
 
 
 def filter_text_files(file_list):
@@ -521,6 +561,7 @@ def do_commit(EXE, git_executable):
         print(final_summary)
 
         select_window_by_name("GitHub Desktop", EXE, git_executable)
+        # time.sleep(0.2)
         type_and_submit("Various changes", final_summary)
     else:
         print("Git not installed or not on filepath")
