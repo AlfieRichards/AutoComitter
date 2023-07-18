@@ -1,4 +1,4 @@
-main_version = 1.4
+main_version = 1.5
 import ctypes
 import platform
 import os
@@ -130,7 +130,7 @@ def type_and_submit(var1, var2):
         keyboard.press_and_release('ctrl+1')
         time.sleep(0.05)
         keyboard.press_and_release('ctrl+g')
-        time.sleep(0.1)
+        time.sleep(0.2)
 
         # title
         keyboard.write(var1)
