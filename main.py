@@ -45,6 +45,8 @@ if os.path.exists('logs.txt'):
 
 # Backup the original print function
 original_print = print
+# Global flag to signal threads to stop
+exit_flag = False
 
 
 # Custom function to print to both the console and the log file
@@ -109,11 +111,6 @@ def start_gui():
 
 def on_left_click(icon, item):
     threading.Thread(target=start_gui).start()  # Run the GUI in a separate thread
-
-
-def on_exit(icon, item):
-    icon.stop()
-    sys.exit(0)
 
 
 def create_image(width, height, color1, color2):
@@ -531,7 +528,7 @@ def split_summaries(summaries, token_limit):
             split_lists.append(current_list)
 
             # reset the current list and token count
-            current_list = None
+            current_list = []
             current_token_count = 0
 
             # add it to this new list and token count
@@ -722,13 +719,15 @@ def run_main():
 
         # Function to process actions from the queue
         def process_actions():
-            while True:
+            while not exit_flag:
                 try:
-                    action = action_queue.get()
+                    action = action_queue.get(timeout=1)  # Timeout to allow checking the exit flag
                     if action is None:
                         break  # Stop processing when None is received
                     action()  # Execute the action (method call)
                     action_queue.task_done()
+                except queue.Empty:
+                    pass
                 except Exception as e:
                     print(f"Error while processing action: {e}")
 
@@ -743,11 +742,19 @@ def run_main():
         def tray_thread():
             # Create the system tray icon
             icon = pystray.Icon("The Github Button", image, "The Github Button")
+
+            def on_exit_menu():
+                global exit_flag
+                exit_flag = True
+                action_queue.put(None)  # Put None to break the action processing loop
+                icon.stop()  # Stop the tray icon
+                os._exit(0)  # Terminate the process immediately
+
             menu = (
                 pystray.MenuItem("View Logs", on_left_click),
                 pystray.MenuItem("Auto Commit",
                                  lambda: action_queue.put(lambda: select_github_desktop(EXE, git_executable))),
-                pystray.MenuItem("Exit", lambda: action_queue.put(on_exit))
+                pystray.MenuItem("Exit", on_exit_menu)
             )
             icon.menu = pystray.Menu(*menu)
             icon.run()
@@ -761,6 +768,11 @@ def run_main():
         keyboard.on_press(lambda event: action_queue.put(lambda: on_keypress(event, EXE, git_executable)))
         keyboard.wait()
 
-        # Stop the action processing thread when the main thread ends
-        action_queue.put(None)
+        # Wait for the action processing thread to finish before exiting the program
+        action_queue.put(None)  # Put None to break the action processing loop
         action_thread.join()
+
+        # Wait for the tray-related thread to finish before exiting the program
+        tray_thread.join()
+
+        # Rest of the cleanup code here
