@@ -1,3 +1,5 @@
+import queue
+
 import pystray
 
 main_version = 1.5
@@ -715,23 +717,50 @@ def run_main():
     else:
         print(f"{supported_extensions_path} already exists.")
 
-    # TRAY THINGS
+        # Create a queue to communicate between threads
+        action_queue = queue.Queue()
 
-    # Create an image (you can replace this with your custom icon)
-    # image = Image.open("path/to/your/icon.png")
-    image = create_image(64, 64, "black", "white")
+        # Function to process actions from the queue
+        def process_actions():
+            while True:
+                try:
+                    action = action_queue.get()
+                    if action is None:
+                        break  # Stop processing when None is received
+                    action()  # Execute the action (method call)
+                    action_queue.task_done()
+                except Exception as e:
+                    print(f"Error while processing action: {e}")
 
-    # Create the system tray icon
-    icon = pystray.Icon("The Github Button", image, "The Github Button")
-    menu = (
-        pystray.MenuItem("View Logs", on_left_click),
-        pystray.MenuItem("Run on_keypress", lambda: select_github_desktop(EXE, git_executable)),
-        pystray.MenuItem("Exit", on_exit)
-    )
-    icon.menu = pystray.Menu(*menu)
-    icon.run()
+        # Start the action processing thread
+        action_thread = threading.Thread(target=process_actions)
+        action_thread.start()
 
-    # TRAY THINGS
+        # Create an image (you can replace this with your custom icon)
+        # image = Image.open("path/to/your/icon.png")
+        image = create_image(64, 64, "black", "white")
 
-    keyboard.on_press(lambda event: on_keypress(event, EXE, git_executable))
-    keyboard.wait()
+        def tray_thread():
+            # Create the system tray icon
+            icon = pystray.Icon("The Github Button", image, "The Github Button")
+            menu = (
+                pystray.MenuItem("View Logs", on_left_click),
+                pystray.MenuItem("Auto Commit",
+                                 lambda: action_queue.put(lambda: select_github_desktop(EXE, git_executable))),
+                pystray.MenuItem("Exit", lambda: action_queue.put(on_exit))
+            )
+            icon.menu = pystray.Menu(*menu)
+            icon.run()
+
+        # Start the tray-related code in a separate thread
+        tray_thread = threading.Thread(target=tray_thread)
+        tray_thread.start()
+
+        # Rest of the code here
+        print("eggs")
+        keyboard.on_press(lambda event: action_queue.put(lambda: on_keypress(event, EXE, git_executable)))
+        keyboard.wait()
+
+        # Stop the action processing thread when the main thread ends
+        action_queue.put(None)
+        action_thread.join()
