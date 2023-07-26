@@ -1,8 +1,4 @@
-import queue
-
-import pystray
-
-main_version = 1.5
+main_version = 1.6
 import ctypes
 import platform
 import os
@@ -16,11 +12,13 @@ import tiktoken_ext
 import tiktoken
 from plyer import notification
 import threading
+import queue
+import pystray
 
 import win32con
 from win32gui import GetWindowText, GetForegroundWindow
 from tkinter import Tk, Text, Scrollbar
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageTk
 import win32gui, win32com.client
 import win32clipboard
 
@@ -65,6 +63,11 @@ print = print_and_log
 def start_gui():
     root = Tk()
     root.title("The Github Button")
+
+    ico = Image.open('icon.png')
+    photo = ImageTk.PhotoImage(ico)
+    root.wm_iconphoto(False, photo)
+
 
     # Create a text box to display the logs
     text_box = Text(root, wrap="none", font=("Comic Sans", 12), state="disabled")
@@ -673,6 +676,9 @@ def run_main():
     EXE = r''
     git_executable = r''
 
+    myappid = u'arti.githubButton'  # arbitrary string
+    ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+
     version_writer_main()
 
     if os.path.isfile(config_file) and os.path.getsize(config_file) > 0:
@@ -736,8 +742,8 @@ def run_main():
         action_thread.start()
 
         # Create an image (you can replace this with your custom icon)
-        # image = Image.open("path/to/your/icon.png")
-        image = create_image(64, 64, "black", "white")
+        image = Image.open("icon.png")
+        #image = create_image(64, 64, "black", "white")
 
         def tray_thread():
             # Create the system tray icon
@@ -774,5 +780,3 @@ def run_main():
 
         # Wait for the tray-related thread to finish before exiting the program
         tray_thread.join()
-
-        # Rest of the cleanup code here
