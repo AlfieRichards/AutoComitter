@@ -5,7 +5,7 @@
 #define MyAppVersion "1.0"
 #define MyAppPublisher "Bean Industries"
 #define MyAppURL "https://alfiedev.co.uk"
-#define MyAppExeName "host.exe"
+#define MyAppExeName "TheGithubButton.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -38,11 +38,13 @@ Source: "C:\Users\asdaFemboy\Downloads\Git-2.41.0.2-64-bit.exe"; DestDir: "{app}
 Source: "C:\Users\asdaFemboy\Desktop\Github Repos\AutoComitter\dist\{#MyAppExeName}"; DestDir: "{userappdata}\{#MyAppName}"; Flags: ignoreversion
 Source: "C:\Users\asdaFemboy\Desktop\Github Repos\AutoComitter\icon.png"; DestDir: "{userappdata}\{#MyAppName}"; Flags: ignoreversion
 Source: "C:\Users\asdaFemboy\Desktop\Github Repos\AutoComitter\icon.ico"; DestDir: "{userappdata}\{#MyAppName}"; Flags: ignoreversion
+
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{userappdata}\{#MyAppName}\{#MyAppExeName}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{userappdata}\{#MyAppName}\{#MyAppExeName}"; IconFilename: "{userappdata}\{#MyAppName}\icon.ico"
+Name: "{userstartup}\{#MyAppName}"; Filename: "{userappdata}\{#MyAppName}\{#MyAppExeName}"; IconFilename: "{userappdata}\{#MyAppName}\icon.ico"
 
 [Run]
 Filename: "{userappdata}\{#MyAppName}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
