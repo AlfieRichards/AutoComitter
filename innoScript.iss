@@ -62,5 +62,5 @@ begin
 end;
 
 [InstallDelete]
-Type: files; Name: "{userappdata}\{#MyAppName}\host.exe"
+Type: files; Name: "{userappdata}\{#MyAppName}\TheGithubButton.exe"
 Type: files; Name: "{userappdata}\{#MyAppName}\versions.txt"

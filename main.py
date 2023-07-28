@@ -1,4 +1,4 @@
-main_version = 1.6
+main_version = 1.7
 import ctypes
 import platform
 import os
@@ -37,9 +37,9 @@ version_file = "versions.txt"
 line_number = 3
 
 # TRAY THINGS
-
-if os.path.exists('logs.txt'):
-    os.remove('logs.txt')
+os.chdir(default_directory)
+if os.path.exists(default_directory + 'logs.txt'):
+    os.remove(default_directory + 'logs.txt')
 
 # Backup the original print function
 original_print = print
@@ -51,7 +51,7 @@ exit_flag = False
 def print_and_log(*args, **kwargs):
     text = " ".join(str(arg) for arg in args)
     original_print(text, **kwargs)  # Print to the console
-    with open('logs.txt', 'a') as log_file:
+    with open(default_directory + 'logs.txt', 'a') as log_file:
         log_file.write(text + '\n')  # Write to the log file
 
 
@@ -92,7 +92,7 @@ def start_gui():
         # Get the current vertical scroll position
         v_scroll_position = text_box.yview()[0]
 
-        with open('logs.txt', 'r') as log_file:
+        with open(default_directory + 'logs.txt', 'r') as log_file:
             logs = log_file.read()
 
         text_box.config(state="normal")
