@@ -1,4 +1,4 @@
-main_version = 1.7
+main_version = 1.8
 import ctypes
 import platform
 import os
@@ -26,7 +26,7 @@ from config import run_config
 
 import openai
 
-openai.api_key = "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"
+openai.api_key = "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"
 
 supported_extensions_path = "supported_extensions.txt"
 shell = win32com.client.Dispatch("WScript.Shell")
