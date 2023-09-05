@@ -1,4 +1,604 @@
-main_version = 1.8
+Wrote the line at line number 3 in versions.txt.
+Wrote the line at line number 3 in versions.txt.
+supported_extensions.txt already exists.
+commiting
+america
+press 1
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window 'Command Prompt' not found.
+Window Name: Command Prompt
+ver: 19045
+press 3
+press 4
+[' main.py', ' supported_extensions.txt', ' testes/host.exe', ' versions.txt', ' logs-1.txt', ' logs-2.txt', ' logs-3.txt', ' logs-4.txt', ' logs-5.txt']
+repo path: C:\Users\asdaFemboy\Desktop\Github Repos\AutoComitter
+changed files: 
+['main.py']
+File Found: main.py
+Initial summary tokens: 6898
+total changes is less than 16k tokens but more than 4k, gonna use the 16k
+Below are several files, each file contains the original content, along with any changes made to it during development.Only give explanations in an easy to understand way and do not say any of the changes. Also only say the explanations.Do not write in a list. Do not skip any files or objects. ALWAYS say the filename before listing any of the changes. If a change starts with + the line was added. If it starts with - it was removed. Write only the summaries. Thank you.
+
+
+
+ Here is the full file for context: 
+ main_version = 1.8
 import ctypes
 import platform
 import os
@@ -86,7 +686,7 @@ def start_gui():
     root = Tk()
     root.title("The Github Button")
 
-    ico = Image.open(default_directory + '\icon.png')
+    ico = Image.open('icon.png')
     photo = ImageTk.PhotoImage(ico)
     root.wm_iconphoto(False, photo)
 
@@ -109,29 +709,25 @@ def start_gui():
     root.grid_columnconfigure(0, weight=1)
 
     # Function to update the logs in the GUI
-    def update_logs(old_logs):
+    def update_logs():
         # Get the current vertical scroll position
         v_scroll_position = text_box.yview()[0]
 
-        with open(default_directory + '\logs.txt', 'r') as log_file:
+        with open(default_directory + 'logs.txt', 'r') as log_file:
             logs = log_file.read()
 
-        if old_logs != logs:
-            text_box.config(state="normal")
-            text_box.delete(1.0, "end")
-            text_box.insert("end", logs)
+        text_box.config(state="normal")
+        text_box.delete(1.0, "end")
+        text_box.insert("end", logs)
 
-            # Restore the previous vertical scroll position
-            text_box.yview_moveto(v_scroll_position)
+        # Restore the previous vertical scroll position
+        text_box.yview_moveto(v_scroll_position)
 
-            text_box.config(state="disabled")
+        text_box.config(state="disabled")
 
-        root.after(1000, update_logs, logs)  # Update logs every 1 second with the new logs
+        root.after(1000, update_logs)  # Update logs every 1 second
 
-    # Initialize old_logs
-    old_logs = ""
-
-    update_logs(old_logs)  # Start updating logs with initial value
+    update_logs()  # Start updating logs
     root.mainloop()
 
 
@@ -279,7 +875,7 @@ def type_and_submit(var1, var2):
         keyboard.press_and_release('ctrl+2')
 
 
-def send_changes_request(request, token_count):
+def send_request(request, token_count):
     if token_count == 4096:
         model = "gpt-3.5-turbo"
     else:
@@ -290,30 +886,6 @@ def send_changes_request(request, token_count):
         messages=[  # Change the prompt parameter to the messages parameter
             {'role': 'system',
              'content': "You are a programmer working in a team of developers. Your job is to neatly fillout the summarys for their github commits in a way which their boss can understand. To keep your team happy, Prioritise not missing files (modified or new) as this is bad and can lead to project delays. To help the boss understand the changes, use simple language and avoid saying code. Make sure to mention any key updates or bug fixes that were implemented. Remember, the summary should provide a high-level overview of each commit, outlining the main changes made. Never skip any files"},
-            {'role': 'user', 'content': request}
-        ],
-        temperature=0.7
-    )
-    content = completion['choices'][0]['message']['content'].strip('"')
-    # print(content)
-    input_cost = ((count_tokens(request, "cl100k_base")) / 1000) * 0.0015
-    output_cost = ((count_tokens(content, "cl100k_base")) / 1000) * 0.002
-    print(request)
-    print("Total cost: $" + str((input_cost + output_cost)))
-    print("Model used: " + model)
-    return content
-
-def send_title_request(request, token_count):
-    if token_count == 4096:
-        model = "gpt-3.5-turbo"
-    else:
-        model = "gpt-3.5-turbo-16k"
-
-    completion = openai.ChatCompletion.create(  # Change the function Completion to ChatCompletion
-        model=model,
-        messages=[  # Change the prompt parameter to the messages parameter
-            {'role': 'system',
-             'content': 'You are a simple system that when given a summary of changes to a project produces a short simple and effective title. If the main change is a new methods just say its name. If things have been fixed feel free to say various bug fixes. Dont be too specific such as saying"Added player assignment in SettingsMenu" . If its like that just say small changes were made. If all the changes are correlating such as all being about logging. Say changes to the log system. Every message you recieve is one of these summaries and you are to respond with a title and nothing else Try to not write more than 5 words'},
             {'role': 'user', 'content': request}
         ],
         temperature=0.7
@@ -625,7 +1197,7 @@ def gpt_requester(split_lists, token_amount):
     # begin generation with a notification
     notify("Beginning generation")
     # get chatgpt to do its thing
-    response = send_changes_request(combined_summary, token_amount)
+    response = send_request(combined_summary, token_amount)
 
     # Add the response to the final response list (in case we have multiple lists of summaries)
     if final_response is None:
@@ -644,9 +1216,9 @@ def gpt_requester(split_lists, token_amount):
 
             # if we can use the cheaper model use it. If not oh well
             if temp_summary_tokens < 4096:
-                shortened_responses.append(send_changes_request(temp_summary, 4096))
+                shortened_responses.append(send_request(temp_summary, 4096))
             else:
-                shortened_responses.append(send_changes_request(temp_summary, 16384))
+                shortened_responses.append(send_request(temp_summary, 16384))
 
         # summarises all the summaries
         temp_summary = "Summarize this as shortly as possible:\n" + '\n'.join(
@@ -656,9 +1228,9 @@ def gpt_requester(split_lists, token_amount):
 
         # if we can use the cheaper model use it. If not oh well
         if temp_summary_tokens < 4096:
-            final_response = send_changes_request(temp_summary, 4096)
+            final_response = send_request(temp_summary, 4096)
         else:
-            final_response = send_changes_request(temp_summary, 16384)
+            final_response = send_request(temp_summary, 16384)
 
     notify("Generation completed")
 
@@ -717,13 +1289,9 @@ def do_commit(EXE, git_executable):
         print("final summary:")
         print(final_summary)
 
-        final_title = send_title_request(final_summary, 3896)
-        print("final title:")
-        print(final_title)
-
         select_window_by_name("GitHub Desktop", EXE, git_executable)
         # time.sleep(0.2)
-        type_and_submit(final_title, final_summary)
+        type_and_submit("Various changes", final_summary)
     else:
         print("Git not installed or not on filepath")
 
@@ -837,3 +1405,18 @@ def run_main():
 
         # Wait for the tray-related thread to finish before exiting the program
         tray_thread.join()
+ 
+ 
+ and here are the changes which were made: 
+ +# iterating log files, -if os.path.exists(default_directory + 'logs.txt'):, -    os.remove(default_directory + 'logs.txt'), +, +, +def get_new_filename(directory, basename):, +    counter = 1, +    while True:, +        new_filename = os.path.join(directory, f"{basename}-{counter}.txt"), +        if not os.path.exists(new_filename):, +            return new_filename, +        counter += 1, +, +, +def rename_logs_file(default_directory):, +    print(default_directory), +    old_filename = os.path.join(default_directory, 'logs.txt'), +    if os.path.exists(old_filename):, +        new_filename = get_new_filename(default_directory, 'logs'), +        os.rename(old_filename, new_filename), +        print(f"Renamed '{old_filename}' to '{new_filename}'"), +, +, +rename_logs_file(default_directory), -    with open(default_directory + 'logs.txt', 'a') as log_file:, +    with open(default_directory + '\logs.txt', 'a') as log_file:, +        log_file.flush()  # Flush the buffer to ensure immediate write, +        #log_file.close()  # Close the file after writing and save it, -, -    filtered_files = [file.strip() for file in file_list if file.strip().lower().endswith(tuple(supported_extensions))], +    # filtered_files = [file.split('/')[-1] for file in file_list if, +    #                   file.strip().lower().endswith(tuple(supported_extensions))], +    filtered_files = [file.split('/')[-1].strip() for file in file_list if, +                      file.strip().lower().endswith(tuple(supported_extensions))], +                print("File Found: " + file), -        #image = create_image(64, 64, "black", "white"), +, +        # image = create_image(64, 64, "black", "white"), -        print("eggs"), -        tray_thread.join(), +        tray_thread.join()
+Total cost: $0.010658
+Model used: gpt-3.5-turbo-16k
+final summary:
+The following changes were made:
+
+1. Added a function to get a new filename for log files.
+2. Renamed the logs.txt file to a new filename using the get_new_filename function.
+3. Updated the file path for opening the logs.txt file to include a backslash.
+4. Removed unnecessary code for filtering files.
+5. Removed a print statement.
+6. Joined the tray_thread before exiting.
