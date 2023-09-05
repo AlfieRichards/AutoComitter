@@ -37,9 +37,29 @@ version_file = "versions.txt"
 line_number = 3
 
 # TRAY THINGS
+# iterating log files
 os.chdir(default_directory)
-if os.path.exists(default_directory + 'logs.txt'):
-    os.remove(default_directory + 'logs.txt')
+
+
+def get_new_filename(directory, basename):
+    counter = 1
+    while True:
+        new_filename = os.path.join(directory, f"{basename}-{counter}.txt")
+        if not os.path.exists(new_filename):
+            return new_filename
+        counter += 1
+
+
+def rename_logs_file(default_directory):
+    print(default_directory)
+    old_filename = os.path.join(default_directory, 'logs.txt')
+    if os.path.exists(old_filename):
+        new_filename = get_new_filename(default_directory, 'logs')
+        os.rename(old_filename, new_filename)
+        print(f"Renamed '{old_filename}' to '{new_filename}'")
+
+
+rename_logs_file(default_directory)
 
 # Backup the original print function
 original_print = print
@@ -51,8 +71,10 @@ exit_flag = False
 def print_and_log(*args, **kwargs):
     text = " ".join(str(arg) for arg in args)
     original_print(text, **kwargs)  # Print to the console
-    with open(default_directory + 'logs.txt', 'a') as log_file:
+    with open(default_directory + '\logs.txt', 'a') as log_file:
         log_file.write(text + '\n')  # Write to the log file
+        log_file.flush()  # Flush the buffer to ensure immediate write
+        #log_file.close()  # Close the file after writing and save it
 
 
 # Replace the built-in print with the custom print_and_log
@@ -67,7 +89,6 @@ def start_gui():
     ico = Image.open('icon.png')
     photo = ImageTk.PhotoImage(ico)
     root.wm_iconphoto(False, photo)
-
 
     # Create a text box to display the logs
     text_box = Text(root, wrap="none", font=("Comic Sans", 12), state="disabled")
@@ -402,7 +423,10 @@ def filter_text_files(file_list):
         supported_extensions = f.read().splitlines()
 
     # Filter the file list to include only text files
-    filtered_files = [file.strip() for file in file_list if file.strip().lower().endswith(tuple(supported_extensions))]
+    # filtered_files = [file.split('/')[-1] for file in file_list if
+    #                   file.strip().lower().endswith(tuple(supported_extensions))]
+    filtered_files = [file.split('/')[-1].strip() for file in file_list if
+                      file.strip().lower().endswith(tuple(supported_extensions))]
 
     return filtered_files
 
@@ -441,6 +465,7 @@ def get_individual_changes(file_path, changed_files):
         # Search for the file within the file_path and its subfolders
         for root, dirs, files in os.walk(file_path):
             if file in files:
+                print("File Found: " + file)
                 # Construct the absolute path to the file
                 file_abs_path = os.path.join(root, file)
 
@@ -743,7 +768,8 @@ def run_main():
 
         # Create an image (you can replace this with your custom icon)
         image = Image.open("icon.png")
-        #image = create_image(64, 64, "black", "white")
+
+        # image = create_image(64, 64, "black", "white")
 
         def tray_thread():
             # Create the system tray icon
@@ -770,7 +796,6 @@ def run_main():
         tray_thread.start()
 
         # Rest of the code here
-        print("eggs")
         keyboard.on_press(lambda event: action_queue.put(lambda: on_keypress(event, EXE, git_executable)))
         keyboard.wait()
 
