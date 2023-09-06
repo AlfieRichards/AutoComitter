@@ -1,4 +1,4 @@
-main_version = 1.8
+main_version = 1.9
 import ctypes
 import platform
 import os
