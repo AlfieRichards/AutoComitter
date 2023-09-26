@@ -1,4 +1,4 @@
-main_version = 1.9
+main_version = 2.0
 import ctypes
 import platform
 import os
@@ -25,8 +25,6 @@ import win32clipboard
 from config import run_config
 
 import openai
-
-openai.api_key = "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"
 
 supported_extensions_path = "supported_extensions.txt"
 shell = win32com.client.Dispatch("WScript.Shell")
@@ -74,7 +72,7 @@ def print_and_log(*args, **kwargs):
     with open(default_directory + '\logs.txt', 'a') as log_file:
         log_file.write(text + '\n')  # Write to the log file
         log_file.flush()  # Flush the buffer to ensure immediate write
-        #log_file.close()  # Close the file after writing and save it
+        # log_file.close()  # Close the file after writing and save it
 
 
 # Replace the built-in print with the custom print_and_log
@@ -192,7 +190,7 @@ def notify(text):
         message=text, )
 
 
-def select_window_by_name(window_name, EXE, git_executable):
+def select_window_by_name(window_name, EXE, git_executable, api_key):
     start_time = time.time()
 
     exe_path = EXE
@@ -227,7 +225,7 @@ def select_window_by_name(window_name, EXE, git_executable):
             break
 
 
-def is_git_installed(EXE, git_executable):
+def is_git_installed(EXE, git_executable, api_key):
     try:
         result = subprocess.run([git_executable, '--version'], capture_output=True, text=True)
         return result.returncode == 0
@@ -235,18 +233,18 @@ def is_git_installed(EXE, git_executable):
         return False
 
 
-def on_keypress(event, EXE, git_executable):
+def on_keypress(event, EXE, git_executable, api_key):
     if event.event_type == keyboard.KEY_DOWN:
         if keyboard.is_pressed('ctrl') and keyboard.is_pressed('alt') and keyboard.is_pressed('c'):
-            select_github_desktop(EXE, git_executable)
+            select_github_desktop(EXE, git_executable, api_key)
 
 
-def select_github_desktop(EXE, git_executable):
-    select_window_by_name("GitHub Desktop", EXE, git_executable)
+def select_github_desktop(EXE, git_executable, api_key):
+    select_window_by_name("GitHub Desktop", EXE, git_executable, api_key)
     time.sleep(0.5)
 
     if GetWindowText(GetForegroundWindow()) == "GitHub Desktop":
-        do_commit(EXE, git_executable)
+        do_commit(EXE, git_executable, api_key)
     else:
         print("failed to select github desktop")
 
@@ -303,8 +301,9 @@ def send_changes_request(request, token_count):
     print("Model used: " + model)
     return content
 
+
 def send_title_request(request, token_count):
-    if token_count == 4096:
+    if token_count > 4096:
         model = "gpt-3.5-turbo"
     else:
         model = "gpt-3.5-turbo-16k"
@@ -323,7 +322,13 @@ def send_title_request(request, token_count):
     input_cost = ((count_tokens(request, "cl100k_base")) / 1000) * 0.0015
     output_cost = ((count_tokens(content, "cl100k_base")) / 1000) * 0.002
     print(request)
-    print("Total cost: $" + str((input_cost + output_cost)))
+
+    # Format the costs to have 16 decimal places
+    formatted_input_cost = "{:.16f}".format(input_cost)
+    formatted_output_cost = "{:.16f}".format(output_cost)
+
+    print("Total cost: $" + str((formatted_input_cost + formatted_output_cost)))
+
     print("Model used: " + model)
     return content
 
@@ -411,7 +416,7 @@ def get_filepath():
         if window_title != "Command Prompt":
             print(window_title)
         else:
-            time.sleep(0.1)
+            time.sleep(0.3)
             if check_build_number():
                 keyboard.press_and_release('ctrl+shift+a')
                 print("press 2")
@@ -459,7 +464,7 @@ def filter_text_files(file_list):
     return filtered_files
 
 
-def get_changed_files(repo_path, EXE, git_executable):
+def get_changed_files(repo_path, EXE, git_executable, api_key):
     os.chdir(repo_path)
     result = subprocess.run(['cd', repo_path, '&&', git_executable, 'status', '--porcelain'], shell=True,
                             capture_output=True)
@@ -665,18 +670,21 @@ def gpt_requester(split_lists, token_amount):
     return final_response
 
 
-def do_commit(EXE, git_executable):
+def do_commit(EXE, git_executable, api_key):
     initial_summary_tokens = 0
 
     print("commiting")
 
-    if is_git_installed(EXE, git_executable):
+    if is_git_installed(EXE, git_executable, api_key):
         # file path is the path to the actual repository
         file_path = get_filepath()
         time.sleep(0.2)
         # these are the names of all the changed files in the repo
-        changed_files = filter_text_files(get_changed_files(file_path, EXE, git_executable))
-        print(get_changed_files(file_path, EXE, git_executable))
+        changed_files = filter_text_files(get_changed_files(file_path, EXE, git_executable, api_key))
+        if len(changed_files) == 0:
+            print("No changes found")
+            return
+        print(get_changed_files(file_path, EXE, git_executable, api_key))
 
         # debug printing the path to the repo and the files changed in it
         print("repo path: " + file_path)
@@ -721,7 +729,7 @@ def do_commit(EXE, git_executable):
         print("final title:")
         print(final_title)
 
-        select_window_by_name("GitHub Desktop", EXE, git_executable)
+        select_window_by_name("GitHub Desktop", EXE, git_executable, api_key)
         # time.sleep(0.2)
         type_and_submit(final_title, final_summary)
     else:
@@ -729,9 +737,10 @@ def do_commit(EXE, git_executable):
 
 
 def run_main():
-    supported_extensions = ['.txt', '.cs', '.json']
+    supported_extensions = ['.txt', '.cs', '.json', '.py']
     EXE = r''
     git_executable = r''
+    api_key = r''
 
     myappid = u'arti.githubButton'  # arbitrary string
     ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
@@ -741,9 +750,10 @@ def run_main():
     if os.path.isfile(config_file) and os.path.getsize(config_file) > 0:
         with open(config_file, "r") as f:
             lines = f.read().splitlines()
-            if len(lines) >= 2:
+            if len(lines) >= 3:
                 EXE = os.path.normpath(lines[0].strip())
                 git_executable = os.path.normpath(lines[1].strip())
+                api_key = os.path.normpath(lines[2].strip())
             else:
                 # Handle invalid config file format
                 print("Invalid config file format.")
@@ -763,6 +773,7 @@ def run_main():
                 if len(lines) >= 2:
                     EXE = os.path.normpath(lines[0].strip())
                     git_executable = os.path.normpath(lines[1].strip())
+                    api_key = os.path.normpath(lines[2].strip())
                 else:
                     # Handle invalid config file format
                     print("Invalid config file format.")
@@ -794,6 +805,8 @@ def run_main():
                 except Exception as e:
                     print(f"Error while processing action: {e}")
 
+        openai.api_key = api_key
+
         # Start the action processing thread
         action_thread = threading.Thread(target=process_actions)
         action_thread.start()
@@ -817,7 +830,7 @@ def run_main():
             menu = (
                 pystray.MenuItem("View Logs", on_left_click),
                 pystray.MenuItem("Auto Commit",
-                                 lambda: action_queue.put(lambda: select_github_desktop(EXE, git_executable))),
+                                 lambda: action_queue.put(lambda: select_github_desktop(EXE, git_executable, api_key))),
                 pystray.MenuItem("Exit", on_exit_menu)
             )
             icon.menu = pystray.Menu(*menu)
@@ -828,7 +841,7 @@ def run_main():
         tray_thread.start()
 
         # Rest of the code here
-        keyboard.on_press(lambda event: action_queue.put(lambda: on_keypress(event, EXE, git_executable)))
+        keyboard.on_press(lambda event: action_queue.put(lambda: on_keypress(event, EXE, git_executable, api_key)))
         keyboard.wait()
 
         # Wait for the action processing thread to finish before exiting the program
