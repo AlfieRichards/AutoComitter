@@ -1,3 +1,0 @@
-Wrote the line at line number 3 in versions.txt.
-Wrote the line at line number 3 in versions.txt.
-supported_extensions.txt already exists.

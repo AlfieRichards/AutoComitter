@@ -736,6 +736,34 @@ def do_commit(EXE, git_executable, api_key):
         print("Git not installed or not on filepath")
 
 
+def do_config():
+    attempts = 0
+
+    while attempts < 5:
+        if os.path.isfile(config_file) and os.path.getsize(config_file) > 0:
+            with open(config_file, "r") as f:
+                lines = f.read().splitlines()
+                if len(lines) >= 3:
+                    EXE = os.path.normpath(lines[0].strip())
+                    git_executable = os.path.normpath(lines[1].strip())
+                    api_key = os.path.normpath(lines[2].strip())
+                    return EXE, git_executable, api_key
+                else:
+                    # Handle invalid config file format
+                    print("Invalid config file format.")
+                    run_config()
+        else:
+            # Handle invalid config file format
+            print("Config not found.")
+            run_config()
+
+        attempts += 1
+
+    if attempts >= 5:
+        print("Unable to find a valid config, exiting.")
+        sys.exit(1)
+
+
 def run_main():
     supported_extensions = ['.txt', '.cs', '.json', '.py']
     EXE = r''
@@ -747,38 +775,8 @@ def run_main():
 
     version_writer_main()
 
-    if os.path.isfile(config_file) and os.path.getsize(config_file) > 0:
-        with open(config_file, "r") as f:
-            lines = f.read().splitlines()
-            if len(lines) >= 3:
-                EXE = os.path.normpath(lines[0].strip())
-                git_executable = os.path.normpath(lines[1].strip())
-                api_key = os.path.normpath(lines[2].strip())
-            else:
-                # Handle invalid config file format
-                print("Invalid config file format.")
-                sys.exit(1)
-        f.close()  # Close the file after reading its contents
-    else:
-        # Config file doesn't exist or is empty
-        print("Config file doesn't exist or is empty.")
-
-        # Run config.py
-        print("running config")
-        run_config()
-
-        if os.path.isfile(config_file) and os.path.getsize(config_file) > 0:
-            with open(config_file, "r") as f:
-                lines = f.read().splitlines()
-                if len(lines) >= 2:
-                    EXE = os.path.normpath(lines[0].strip())
-                    git_executable = os.path.normpath(lines[1].strip())
-                    api_key = os.path.normpath(lines[2].strip())
-                else:
-                    # Handle invalid config file format
-                    print("Invalid config file format.")
-                    sys.exit(1)
-            f.close()  # Close the file after reading its contents
+    # checks to see if the config exists and is correct
+    EXE, git_executable, api_key = do_config()
 
     if not os.path.isfile(supported_extensions_path):
         with open(supported_extensions_path, 'w') as file:
