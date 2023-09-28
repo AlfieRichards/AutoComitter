@@ -191,3 +191,4 @@ fabric.properties
 buildGithubButton.bat
 versions.txt
 logs.txt
+*.txt
