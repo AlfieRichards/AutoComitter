@@ -48,6 +48,10 @@ Contributions are always welcome!
 
 Please open reports when you find bugs and just submit your logs, if you think you may be able to fix it go ahead and make a fork!
 
+## Auto Updating
+This program uses an extremely simple system that on start compares the local versions (in the top of each python file and versions.txt) to the versions file on my web server (https://alfiedev.co.uk/versions.txt) If there is a mismatch in the versions it will prompt the user to download from my website at (https://alfiedev.co.uk/GithubButtonInstaller.exe) This system is absolutely terrible however I've yet to come up with a better approach.
+
+
 
 ## Roadmap
 
