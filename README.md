@@ -42,6 +42,8 @@ Then press the shortcut keybind ("ctrl + alt + c") or the physical github button
 Throughout this process I reccomend not touching anything and just letting it do its thing, it shouldnt try and enter text on any windows that arent GitHub desktop however it will stop it from functioning if the wrong window is selected.
 
 If it doesent work for whatever reason feel free to just try it again, if it still isnt working there may be an issue so check out the issues page to see if its reported!
+
+You can change the file extensions it will check for changes in supported_extensions.txt wherever the exe is located
 ## Contributing
 
 Contributions are always welcome!
