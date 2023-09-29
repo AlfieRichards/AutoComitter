@@ -33,11 +33,11 @@ If wanted you may also compile your own installer as the inno script is containe
 Using the GitHub button is pretty simple.
 First open GitHub desktop with your desired repository selected as is shown in the image below
 
-![Repo Image](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
+![Repo Image](https://github.com/AlfieRichards/AutoComitter/blob/main/imagery/Repo%20Selected.png)
 
 Then press the shortcut keybind ("ctrl + alt + c") or the physical github button. This will start the commit process. Once this is pressed it should do the shortcut to view this repository in command prompt, it will then copy the contents of this window to get the path to the repository. If you do not have access to command prompt for whatever reason issues will arise. Once it has done this you will recieve a notification that the ai request has been submitted and it will shortly be filled into the title and description boxes in github desktop.
 
-![Demo Image](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
+![Demo Image](https://github.com/AlfieRichards/AutoComitter/blob/main/imagery/Changes%20Shown.png)
 
 Throughout this process I reccomend not touching anything and just letting it do its thing, it shouldnt try and enter text on any windows that arent GitHub desktop however it will stop it from functioning if the wrong window is selected.
 
@@ -54,6 +54,12 @@ Please open reports when you find bugs and just submit your logs, if you think y
 - Better integration with GitHub desktop (no more open in terminal)
 
 - Increased speed with ChatGPT
+
+- Improved prompt for better output
+  
+- Using the description box to provide context to chatgpt
+  
+- Only sending chat gpt relevant parts of a script not the whole thing to lower token counts (just the areas around changes)
 
 - Custom tailored ChatGPT model for better responses
 
