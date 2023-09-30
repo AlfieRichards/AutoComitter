@@ -83,5 +83,6 @@ The arduino script for you to flash is also contained in the "3D print files" fo
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+The Github Button © 2023 by Alfie Richards is licensed under Attribution-NonCommercial 4.0 International. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc/4.0/
+Or check the license file at https://github.com/AlfieRichards/AutoComitter/blob/main/LICENSE
 
