@@ -80,6 +80,9 @@ https://thepihut.com/products/adafruit-neokey-bff (keyboard switch board)
 The 3D print files are in the repository under "3D print files" Feel free to alter them in any way you want!
 The arduino script for you to flash is also contained in the "3D print files" folder
 
+![image](https://github.com/AlfieRichards/AutoComitter/assets/87566534/84c0743f-d008-4525-8009-1a34f35a6584)
+
+
 
 ## License
 
